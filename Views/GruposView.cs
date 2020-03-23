@@ -195,5 +195,34 @@ namespace EfRelations.Views
             Console.Write("\n---> Presione ENTER para continuar... ");
             Console.ReadLine();
         }
+    
+        public void ViewUsersInGroup()
+        {
+            Console.Clear();
+
+            Console.WriteLine("\n---> VER USUARIOS EN EL GRUPO:");
+            Console.WriteLine("==============================");
+            Console.WriteLine();
+
+            var group = this.SelectGroup();
+
+            System.Console.WriteLine($"\t---> GRUPO: {group.Nombre}");
+            System.Console.WriteLine("\n\t---> USUARIOS: ");
+
+            using (_context = new AppDataContext())
+            {
+                var users = _context.Usuarios
+                    .Where(u => u.UsuarioGrupo.Select(ug => ug.Grupo).Contains(group))                
+                    .ToList();
+
+                foreach (var user in users)
+                {
+                    System.Console.WriteLine($"\t\t-> {user.Nombre}");
+                }
+            }
+
+            Console.Write("\n---> Presione ENTER para continuar... ");
+            Console.ReadLine();
+        }
     }
 }

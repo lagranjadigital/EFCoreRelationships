@@ -32,7 +32,8 @@ namespace EfRelations
                 Console.WriteLine("\t\t13) ---> Eliminar Usuario");
                 Console.WriteLine("\t\t14) ---> Asignar Usuario a Grupo");
                 Console.WriteLine("\t\t15) ---> Ver Usuarios y Grupos");
-                Console.WriteLine("\t\t16) ---> Eliminar Usuario De Un Grupo");
+                Console.WriteLine("\t\t16) ---> Ver Grupos de un determinado usaurio");
+                Console.WriteLine("\t\t17) ---> Eliminar Usuario De Un Grupo");
                 Console.WriteLine();
 
                 Console.WriteLine("\t---> Grupos:");
@@ -40,6 +41,7 @@ namespace EfRelations
                 Console.WriteLine("\t\t22) ---> Ver Grupos");
                 Console.WriteLine("\t\t23) ---> Eliminar Grupo");
                 Console.WriteLine("\t\t24) ---> Ver Grupos Con Usuarios");
+                Console.WriteLine("\t\t25) ---> Ver Usuarios de un determinado grupo");
                 Console.WriteLine();
 
                 Console.WriteLine("\t---> Administración:");
@@ -73,6 +75,10 @@ namespace EfRelations
                         break;
                     case "16":
                         usuarios = new UsersView();
+                        usuarios.ViewGroupsForUser();
+                        break;
+                    case "17":
+                        usuarios = new UsersView();
                         usuarios.RemoveUserFromGroup();
                         break;
                     case "21":
@@ -91,8 +97,12 @@ namespace EfRelations
                         grupos = new GruposView();
                         grupos.ViewGroupsAndUsers();
                         break;
+                    case "25":
+                        grupos = new GruposView();
+                        grupos.ViewUsersInGroup();
+                        break;
                     case "q":
-                        break;                    
+                        break;
                 }
             }
         }

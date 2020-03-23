@@ -115,7 +115,7 @@ namespace EfRelations.Views
                 this.RemoveUser();
             }
 
-        }
+        }        
 
         public User SelectUser()
         {
@@ -310,6 +310,35 @@ namespace EfRelations.Views
                 _context.UsuariosGrupos.Remove(userGroup);
 
                 _context.SaveChanges();
+            }
+
+            Console.Write("\n---> Presione ENTER para continuar... ");
+            Console.ReadLine();
+        }
+    
+        public void ViewGroupsForUser()
+        {
+            Console.Clear();
+
+            Console.WriteLine("\n---> VER GRUPOS POR USUARIO:");
+            Console.WriteLine("============================");            
+
+            var User = this.SelectUser();
+            List<Group> Groups;
+
+            using (_context = new AppDataContext())
+            {
+                Groups = _context.Grupos
+                    .Where(g => g.UsuarioGrupo
+                        .Select(ug => ug.Usuario).Contains(User))
+                    .ToList();
+            }
+
+            System.Console.WriteLine($"\t---> USUARIO: {User.Nombre}");
+
+            foreach (var Group in Groups)
+            {
+                System.Console.WriteLine($"\t\t-> {Group.Nombre}");
             }
 
             Console.Write("\n---> Presione ENTER para continuar... ");
